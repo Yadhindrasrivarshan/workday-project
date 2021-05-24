@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
+
+import Layout from './components/Layout'
+import Login from './Login/Login'
+import PersonalDetails from './pages/PersonalDetails';
+import SkillSet from './pages/SkillSet';
+import TeamDetails from './pages/TeamDetails';
+import {useLocation} from 'react-router-dom'
 
 function App() {
+  let location=useLocation()
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <div>
+      { location.pathname==='/login'?
+      
+     ( <Route path="/login" exact>
+        {console.log(location.pathname)}
+        <Login/>
+      </Route>):(
+          <Layout>
+          <Switch>
+            <Route exact path="/">
+              <PersonalDetails/>
+            </Route>
+            <Route path="/skillset" exact>
+              <SkillSet/>
+            </Route>
+            <Route path="/teamdetails" exact> 
+              <TeamDetails/>
+            </Route>
+          </Switch>
+          </Layout>
+      )}
+   </div>
   );
 }
 
 export default App;
+
