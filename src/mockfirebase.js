@@ -1,15 +1,16 @@
 import firebase from 'firebase'
 
-var firebaseConfig = firebase.initializeApp({
-    apiKey: "AIzaSyC9FJfiWLjkw4Ontjx6zAdyszyrFU7MvxY",
-    authDomain: "project-2-b5675.firebaseapp.com",
-    projectId: "project-2-b5675",
-    storageBucket: "project-2-b5675.appspot.com",
-    messagingSenderId: "140775821311",
-    appId: "1:140775821311:web:1360268f166cd43dd1e1ca"
-  });
 
+  var firebaseConfig = firebase.initializeApp({
+    apiKey: "AIzaSyDsUXlick1r8r5g2OUczYLlZs1YrSjPJjo",
+    authDomain: "project-workday.firebaseapp.com",
+    projectId: "project-workday",
+    storageBucket: "project-workday.appspot.com",
+    messagingSenderId: "1020739224236",
+    appId: "1:1020739224236:web:c5418d436dcb4a2fc35509",
+    measurementId: "G-QGKJW87ZKB"
+  })
 
 var database=firebaseConfig.firestore()
-const fire=firebaseConfig
-export  {fire,database}
+const app=firebaseConfig
+export  {app,database}
