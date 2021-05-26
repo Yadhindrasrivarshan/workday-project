@@ -15,6 +15,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import Profile from './Profile';
 const drawerWidth=200
 
 const useStyles=makeStyles((theme)=>{
@@ -83,7 +84,7 @@ const Layout = ({children}) => {
                     <Typography>
                         Employee Details {" "}
                     </Typography>
-                    <AccountCircleIcon style={{padding:"0 5px"}}/>
+                    <Profile/>
                 </Toolbar>
             </AppBar>
             <Drawer
