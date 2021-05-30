@@ -16,6 +16,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Profile from './Profile';
+import { Details } from '@material-ui/icons';
 const drawerWidth=200
 
 const useStyles=makeStyles((theme)=>{
@@ -72,6 +73,11 @@ const Layout = ({children}) => {
             text:'Team-Details',
             icon:<GroupIcon color="secondary"/>,
             path:'/teamdetails'
+        },
+        {
+            text:'ViewDetails',
+            icon:<Details color="secondary"/>,
+            path:'/viewdetails'
         }
     ]
     return (

@@ -2,7 +2,7 @@ import { Button, TextField } from "@material-ui/core";
 import React, { Component } from "react";
 import "./TeamDetails.css";
 
-import {database,fire} from '../mockfirebase'
+import {app, database,fire} from '../mockfirebase'
 import {ListItem,ListItemIcon,ListItemText} from '@material-ui/core'
 import '../components/Todo.css'
 import GroupIcon from '@material-ui/icons/Group';
@@ -121,7 +121,8 @@ class TeamDetails extends Component {
       this.state.list.map((item)=>{
         list1.push(item.value)
       })
-      database.collection('details').doc('QTv6ThZefNifWJNSYabn').collection('TeamDetails').add({
+      const userid=app.auth().currentUser.uid||""
+      database.collection('details').doc(userid).collection('TeamDetails').add({
         TeamName:this.state.TeamName,
         Division:this.state.division,
         Experience:this.state.experience,

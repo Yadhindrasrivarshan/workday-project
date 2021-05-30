@@ -19,7 +19,7 @@ import red from '@material-ui/core/colors/red';
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import Favorite from '@material-ui/icons/Favorite';
 import Avatar from '@material-ui/core/Avatar';
-import {database} from '../mockfirebase'
+import {database,app} from '../mockfirebase'
 
 const useStyles=makeStyles({
     div:{
@@ -61,6 +61,8 @@ function SkillSet(){
     const handleClose=()=>{
         setOpen(false);
     };
+    const userid=app.auth().currentUser.uid||""
+
 
     //TODO
     const [task,setTask]=React.useState('');//value of textField

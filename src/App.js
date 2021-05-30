@@ -8,15 +8,19 @@ import SkillSet from './pages/SkillSet';
 import TeamDetails from './pages/TeamDetails';
 import {useLocation} from 'react-router-dom'
 import PrivateRoute from './Login-fire/PrivateRoute';
-import Home from './Login-fire/Home';
 import SignUp from './Login-fire/SignUp';
 import {app} from './mockfirebase'
-
+import PersonalDetailsView from './viewDetails/PersonalDetailsView.js'
+import {AuthProvider} from './Login-fire/Auth'
 
 function App() {
   let location=useLocation()
 
   var user=app.auth().currentUser
+
+  if(user){
+    console.log(user.uid);
+  }
   // let [toggle,setToggle]=useState(false)
   let toggle
 
@@ -29,30 +33,28 @@ function App() {
 
   
   return (
-  <div>
-      { location.pathname==='/login' &&   <Route exact path="/login" component={Login} />}
-      <div>
-      {location.pathname==='/' && !user &&  <Route exact path="/" component={()=>(<Redirect to='/login' />)}/>}
-      </div>
-      { location.pathname==='/signup' &&   <Route exact path="/signup" component={SignUp} />}
-      
-      {location.pathname!=='/login' && location.pathname!=='/signup' && 
+  <AuthProvider>
+      { location.pathname==='/login' &&  <Route exact path="/login" component={Login}/>}
+      { location.pathname==='/signup' &&  <Route exact path="/signup" component={SignUp} />}
+      {location.pathname==='/viewdetails' && <Route exact path='/viewdetails' component={PersonalDetailsView}/>}
+      {location.pathname!=='/login' && location.pathname!=='/signup' &&  location.pathname!=='/viewdetails' &&
            <Layout>
            <Switch>
-             <Route exact path="/">
+             <PrivateRoute exact path="/">
                <PersonalDetails/>
-             </Route>
-             <Route path="/skillset" exact>
+             </PrivateRoute>
+             <PrivateRoute path="/skillset" exact>
                <SkillSet/>
-             </Route>
-             <Route path="/teamdetails" exact> 
+             </PrivateRoute>
+             <PrivateRoute path="/teamdetails" exact> 
                <TeamDetails/>
-             </Route>
+             </PrivateRoute>
            </Switch>
            </Layout>
+        
           }
 
-   </div>
+   </AuthProvider>
   );
 }
 //{location.pathname==='/' && <Route path='/login' component={()=><Redirect to='/login'/>}}

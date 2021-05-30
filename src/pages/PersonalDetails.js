@@ -12,7 +12,7 @@ import {
     FormControlLabel,
     TextField
   } from '@material-ui/core';
-  import {database} from '../mockfirebase'
+  import {database,app} from '../mockfirebase'
   function PersonalDetails() {
     const [details,setDetails]=useState({
       firstname:"",
@@ -31,12 +31,21 @@ import {
         [e.target.name]: e.target.value
       });
     }
+    let userid
+    try{
+          userid=app.auth().currentUser.uid
+        
+    }
+    catch(err){
+          userid='custom'
+    }
+    console.log(userid);
     const handleSubmit=(e)=>{
       e.preventDefault();
       //alert({details});
       //alert(JSON.stringify(details))
       console.log(details)
-       database.collection('details').doc('QTv6ThZefNifWJNSYabn').collection('PersonalDetails').add(
+       database.collection('details').doc(userid).collection('PersonalDetails').add(
          details
        )
         .then((docRef)=> {
