@@ -1,3 +1,4 @@
+import { CircularProgress } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import {app} from "../mockfirebase"
 export const AuthContext = React.createContext();
@@ -14,7 +15,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   if(pending){
-    return <>Loading...</>
+    return <>
+        <CircularProgress />
+    </>
   }
 
   return (

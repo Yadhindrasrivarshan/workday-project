@@ -61,9 +61,6 @@ function SkillSet(){
     const handleClose=()=>{
         setOpen(false);
     };
-    const userid=app.auth().currentUser.uid||""
-
-
     //TODO
     const [task,setTask]=React.useState('');//value of textField
     const[rate,setRate]=React.useState('');//value of rating
@@ -81,16 +78,24 @@ function SkillSet(){
     const AddTask=()=>{
         console.log(task);
         const taskDetails={
-            id:Math.floor(Math.random()*10000),
             skill_name:task,
-            rate:rate,fav:fav
+            rate:rate,
+            fav:fav
         }
         setTodoList([...toDoList,taskDetails]);
 
-        database.collection('details').doc('QTv6ThZefNifWJNSYabn').collection('SkillSet').doc('vRaye7JSuZwopewlc4FK').collection('TechSkill').add(taskDetails)
-        // db.collection("tech_skill").add(taskDetails)
-        .then((docRef)=>{alert("skill_name "+taskDetails.skill_name+"\nrate "+taskDetails.rate+"\nfav "+taskDetails.fav)});
-        setOpen(false);
+        // database.collection('details').doc('QTv6ThZefNifWJNSYabn').collection('SkillSet').doc('vRaye7JSuZwopewlc4FK').collection('TechSkill').add(taskDetails)
+        // // db.collection("tech_skill").add(taskDetails)
+        // .then((docRef)=>{alert("skill_name "+taskDetails.skill_name+"\nrate "+taskDetails.rate+"\nfav "+taskDetails.fav)});
+        // setOpen(false);
+        database.collection('Skillsets').doc(app.auth().currentUser.uid).collection('TechSkills').add(taskDetails)
+          .then(()=>{
+            alert("TeamDetails have been submitted successfully 😁😎")
+          })
+          .catch((error)=>{
+            alert(error.message)
+          })
+          setOpen(false);
     }
     
 
@@ -124,16 +129,18 @@ function SkillSet(){
     const AddTask_s=()=>{
         console.log(task);
         const taskDetails_s={
-            id:Math.floor(Math.random()*10000),
             skill_name:task_s,
             rate:rate_s,
             fav:fav_s
         }
         setTodoList_s([...toDoList_s,taskDetails_s]);
-        database.collection('details').doc('QTv6ThZefNifWJNSYabn').collection('SkillSet').doc('vRaye7JSuZwopewlc4FK').collection('SoftSkills').add(taskDetails_s)
-
-        .then((docRef)=>{alert("skill_name "+taskDetails_s.skill_name+"\nrate "+taskDetails_s.rate+"\nfav "+taskDetails_s.fav)
-        console.log("Document written with ID: ", docRef.id)});
+        database.collection('Skillsets').doc(app.auth().currentUser.uid).collection('softSkills').add(taskDetails_s)
+        .then(()=>{
+          alert("TeamDetails have been submitted successfully 😁😎")
+        })
+        .catch((error)=>{
+          alert(error.message)
+        })
         //arrow function with document as argument in firestore
         setOpens(false);
     }
@@ -167,14 +174,19 @@ function SkillSet(){
     const AddTask_o=()=>{
         console.log(task);
         const taskDetails_o={
-            id:Math.floor(Math.random()*10000),
+        
             skill_name:task_o,
             rate:rate_o,
             fav:fav_o
         }
         setTodoList_o([...toDoList_o,taskDetails_o]);
-        database.collection('details').doc('QTv6ThZefNifWJNSYabn').collection('SkillSet').doc('vRaye7JSuZwopewlc4FK').collection('OtherSkills').add(taskDetails_o)
-        .then((docRef)=>{alert("skill_name "+taskDetails_o.skill_name+"\nrate "+taskDetails_o.rate+"\nfav "+taskDetails_o.fav)});
+        database.collection('Skillsets').doc(app.auth().currentUser.uid).collection('otherSkills').add(taskDetails_o)
+          .then(()=>{
+          
+          })
+          .catch((error)=>{
+            alert(error.message)
+          })
         setOpen_o(false);
     }
 

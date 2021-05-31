@@ -121,24 +121,14 @@ class TeamDetails extends Component {
       this.state.list.map((item)=>{
         list1.push(item.value)
       })
-      const userid=app.auth().currentUser.uid||""
-      database.collection('details').doc(userid).collection('TeamDetails').add({
+      database.collection('TeamDetails').doc(app.auth().currentUser.uid).set({
         TeamName:this.state.TeamName,
         Division:this.state.division,
         Experience:this.state.experience,
         Role:this.state.role,
         DateOfJoining:this.state.DateOfJoining,
         PrevTeams:list1,
-
       })
-      // database.collection('detail').doc('XsrWQli7hqNGyk98SJ66').collection('User1').add({
-      //     TeamName:this.state.TeamName,
-      //   Division:this.state.division,
-      //   Experience:this.state.experience,
-      //   Role:this.state.role,
-      //   DateOfJoining:this.state.DateOfJoining,
-      //   PrevTeams:list1,
-      // })
       .then(()=>{
         alert("TeamDetails have been submitted successfully 😁😎")
       })

@@ -31,23 +31,10 @@ import {
         [e.target.name]: e.target.value
       });
     }
-    let userid
-    try{
-          userid=app.auth().currentUser.uid
-        
-    }
-    catch(err){
-          userid='custom'
-    }
-    console.log(userid);
     const handleSubmit=(e)=>{
       e.preventDefault();
-      //alert({details});
-      //alert(JSON.stringify(details))
       console.log(details)
-       database.collection('details').doc(userid).collection('PersonalDetails').add(
-         details
-       )
+       database.collection('PersonalDetails').doc(app.auth().currentUser.uid).set(details)
         .then((docRef)=> {
           alert("Your message has been submitted:+1:");
           console.log("Document written with ID: ", docRef.id);

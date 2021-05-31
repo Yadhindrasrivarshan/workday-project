@@ -10,7 +10,7 @@ import {useLocation} from 'react-router-dom'
 import PrivateRoute from './Login-fire/PrivateRoute';
 import SignUp from './Login-fire/SignUp';
 import {app} from './mockfirebase'
-import PersonalDetailsView from './viewDetails/PersonalDetailsView.js'
+import ViewDetails from './pages/ViewDetails.js'
 import {AuthProvider} from './Login-fire/Auth'
 
 function App() {
@@ -36,8 +36,8 @@ function App() {
   <AuthProvider>
       { location.pathname==='/login' &&  <Route exact path="/login" component={Login}/>}
       { location.pathname==='/signup' &&  <Route exact path="/signup" component={SignUp} />}
-      {location.pathname==='/viewdetails' && <Route exact path='/viewdetails' component={PersonalDetailsView}/>}
-      {location.pathname!=='/login' && location.pathname!=='/signup' &&  location.pathname!=='/viewdetails' &&
+      {location.pathname==='/viewdetails' && <PrivateRoute exact path='/viewdetails' component={ViewDetails}/>}
+      {location.pathname!=='/login' && location.pathname!=='/signup' && location.pathname!=='/viewdetails' &&
            <Layout>
            <Switch>
              <PrivateRoute exact path="/">
@@ -49,6 +49,9 @@ function App() {
              <PrivateRoute path="/teamdetails" exact> 
                <TeamDetails/>
              </PrivateRoute>
+             {/* <PrivateRoute path="/viewdetails" exact> 
+               <ViewDetails/>
+             </PrivateRoute> */}
            </Switch>
            </Layout>
         
